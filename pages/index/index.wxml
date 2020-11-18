@@ -3,4 +3,7 @@
   <view>
     <button bindtap="bindTryBtn">点击尝试</button>
   </view>
+  <view>
+    <button bindtap="bindTryCustomBtn">自定义样式</button>
+  </view>
 </view>

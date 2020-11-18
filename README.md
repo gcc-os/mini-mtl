@@ -135,3 +135,86 @@ showLoading 默认不带文字的加载动画
 ### cl()
 
 closeLoading 关闭加载动画
+
+### init(config)
+
+```
+
+config = {
+    sl: { // 调用slt时，默认的文案
+        defaultTitle: '载入中',
+    },
+    sm: { // 调用sm相关函数时默认的title字段
+        defaultTitle: '提示'
+    },
+    sm1: {
+            title: 'SM1',
+            content: '请点击确定按钮',
+            showLeft: true,
+            left: {
+                text: '取消',
+                color: '#FF0000',
+            },
+            right: {
+                text: '确定',
+                color: '#0000FF',
+            }
+    },
+    sm2: {
+        title: 'SM2',
+        showLeft: true,
+        left: {
+            text: '取消',
+            color: '#000000',
+        },
+        right: {
+            text: '确定',
+            color: '#0000FF',
+        }
+    },
+    sm3: {
+        title: 'SM2',
+        showLeft: true,
+        left: {
+            text: '取消',
+            color: '#000000',
+        },
+        right: {
+            text: '确定',
+            color: '#0000FF',
+        }
+    },
+    sm4: {
+        title: 'SM2',
+        showLeft: true,
+        left: {
+            text: '取消',
+            color: '#000000',
+        },
+        right: {
+            text: '确定',
+            color: '#0000FF',
+        }
+    },
+    sm5: {
+        title: 'SM2',
+        showLeft: true,
+        left: {
+            text: '取消',
+            color: '#000000',
+        },
+        right: {
+            text: '确定',
+            color: '#0000FF',
+        }
+    },
+}
+
+sm1 自定义sm的样式，sm1的调用和sm没有本质区别，在初始化的时候设置了sm1的几项参数后
+在调用的时候可以省略，比如上方设置了sm1的所有参数，调用时可以不传任何参数：
+mtl.sm1();
+当然你也可以这样：
+mtl.sm1("您已付过钱了，请不要重复支付");
+类似的，sm2、sm3、sm4、sm5的使用方式跟都与sm相同，只不过可以提前设置他们的参数。
+
+```

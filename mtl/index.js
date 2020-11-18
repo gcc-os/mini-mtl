@@ -26,13 +26,32 @@ function CCPromise(handle) {
   };
 }
 
+const SM_DEMO = {
+  content: '提示内容',
+  title: '提示',
+  showLeft: false,
+  left: {
+    text: '取消',
+    color: '#000000',
+  },
+  right: {
+    text: '确定',
+    color: '#576B95',
+  }
+}
+
 let mtlParams = {
   sl: {
     defaultTitle: '载入中',
   },
   sm: {
     defaultTitle: '提示'
-  }
+  },
+  sm1: SM_DEMO,
+  sm2: SM_DEMO,
+  sm3: SM_DEMO,
+  sm4: SM_DEMO,
+  sm5: SM_DEMO,
 };
 
 const MTL = {
@@ -89,6 +108,26 @@ const MTL = {
     })
     return _promise;
   },
+  sm1(content, title, showLeft, left, right) {
+    let _p = mtlParams.sm1;
+    return this.sm(content || _p.content, title || _p.title, showLeft || _p.showLeft, left || _p.left, right || _p.right);
+  },
+  sm2(content, title, showLeft, left, right) {
+    let _p = mtlParams.sm2;
+    return this.sm(content || _p.content, title || _p.title, showLeft || _p.showLeft, left || _p.left, right || _p.right);
+  },
+  sm3(content, title, showLeft, left, right) {
+    let _p = mtlParams.sm3;
+    return this.sm(content || _p.content, title || _p.title, showLeft || _p.showLeft, left || _p.left, right || _p.right);
+  },
+  sm4(content, title, showLeft, left, right) {
+    let _p = mtlParams.sm4;
+    return this.sm(content || _p.content, title || _p.title, showLeft || _p.showLeft, left || _p.left, right || _p.right);
+  },
+  sm5(content, title, showLeft, left, right) {
+    let _p = mtlParams.sm5;
+    return this.sm(content || _p.content, title || _p.title, showLeft || _p.showLeft, left || _p.left, right || _p.right);
+  },
   /**
     * showModal 确认对话框 同时显示两个按钮
     * @param {string} content 提示内容
@@ -141,7 +180,7 @@ const MTL = {
   },
   init(params) {
     mtlParams = params ? Object.assign(mtlParams, params) : mtlParams;
-  }
+  },
 }
 
 export default MTL;
