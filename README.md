@@ -90,9 +90,14 @@ showModal 确认对话框，默认不显示“取消按钮”
 类型 object
 右边按钮的样式{text:'按钮名称',color:'颜色值'}
 
-return CCPromise对象
-与promise对象类似，你可以这样使用
+```
+
+return CCPromise 对象
+与 promise 对象类似，你可以这样使用
+
+```
 const smPromise = mtl.sm("您真的很厉害！",'提示',true);
+
 smPromise.btn(()=>{
     console.log("您点击了右边的按钮");
 }).left(()=>{
@@ -100,8 +105,11 @@ smPromise.btn(()=>{
 }).right(()=>{
     console.log("您点击了右边的按钮");
 });
+```
 
 或者简写成：
+
+```
 mtl.sm("您真的很厉害！",'提示',true).btn(()=>{
     console.log("您点击了右边的按钮");
 });
