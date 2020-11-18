@@ -89,6 +89,32 @@ showModal 确认对话框，默认不显示“取消按钮”
 
 类型 object
 右边按钮的样式{text:'按钮名称',color:'颜色值'}
+
+return CCPromise对象
+与promise对象类似，你可以这样使用
+const smPromise = mtl.sm("您真的很厉害！",'提示',true);
+smPromise.btn(()=>{
+    console.log("您点击了右边的按钮");
+}).left(()=>{
+    console.log("您点击了左边的按钮");
+}).right(()=>{
+    console.log("您点击了右边的按钮");
+});
+
+或者简写成：
+mtl.sm("您真的很厉害！",'提示',true).btn(()=>{
+    console.log("您点击了右边的按钮");
+});
+mtl.sm("您真的很厉害！",'提示',true).left(()=>{
+    console.log("您点击了左边的按钮");
+}).right(()=>{
+    console.log("您点击了右边的按钮");
+});;
+
+btn 在Modal两个按钮都显示时，始终监听右边按钮的点击事件；只显示一个按钮时监听这一个按钮的点击事件。
+left 在Modal两个按钮都显示时，始终监听左边按钮的点击事件；只显示一个按钮时无效。
+right 在Modal两个按钮都显示时，始终监听右边按钮的点击事件；只显示一个按钮时监听这一个按钮的点击事件。
+
 ```
 
 ### smc(content, title, left = {}, right = {})
