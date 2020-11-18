@@ -1,0 +1,22 @@
+{
+  "name": "mini-mtl",
+  "version": "1.0.0",
+  "description": "miniprogram Modal+Toast+Loading",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gcc-os/mini-mtl.git"
+  },
+  "keywords": [
+    "miniprogram"
+  ],
+  "author": "richie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gcc-os/mini-mtl/issues"
+  },
+  "homepage": "https://github.com/gcc-os/mini-mtl#readme"
+}
