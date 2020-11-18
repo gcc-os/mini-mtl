@@ -1,5 +1,5 @@
 // 微信原生弹窗的封装
-let IS_Loading = false; // 是否正在加载
+let MTL_IS_Loading = false; // 是否正在加载
 
 // 模拟promise函数，处理弹窗按钮点击状态管理，提高代码可读性.
 function CCPromise(handle) {
@@ -36,7 +36,13 @@ let mtlParams = {
 };
 
 const MTL = {
-  // *@params customImage: 自定义图片
+  /**
+   * 显示Toast，1.5秒后消失(微信默认时间)
+   * 
+   * @param {string} title 提示的内容 最多7个汉字，超出会被切割
+   * @param {string} customImage 自定义toast显示的图片
+   * @param {boolean} isMask 是否启用mask（禁止触摸遮罩穿透）默认启用
+  */
   st(title, customImage, isMask = true) { // show toast for success —— 显示成功的toast，
     this.cl(); // 关闭Loading
     wx.showToast({
@@ -48,16 +54,17 @@ const MTL = {
       complete() { }
     });
   },
-  /* showModal 确认对话框
-    *@param content：提示内容  
-    *@param title：提示标题  
-    *@param showLft：是否显示左边按钮 (取消按钮)
-    *@param left：左边按钮的样式 {text:'',color:''}    
-    *@param right：右边按钮的样式{text:'',color:''}
-    *@return CCPromise
-    使用简介：
-    MTL.sm('确定删除吗?').right(()=>{ "点击了右边的按钮" }).left(()=>{ “点击了左边的按钮” });
-    MTL.sm('记录已删除!').btn(()=>{ "点击了右边的按钮，或唯一的确定按钮 " });
+  /**
+    * showModal 确认对话框
+    * @param {string} content 提示内容
+    * @param {string} title 提示的标题
+    * @param {boolean} showLft 是否显示左边按钮（取消按钮），默认不显示
+    * @param {object} left 左边按钮的样式 {text:'按钮名称',color:'颜色值'}
+    * @param {object} right 右边按钮的样式{text:'按钮名称',color:'颜色值'}
+    * @return CCPromise
+    * 使用简介：
+    * MTL.sm('确定删除吗?').right(()=>{ "点击了右边的按钮" }).left(()=>{ “点击了左边的按钮” });
+    * MTL.sm('记录已删除!').btn(()=>{ "点击了右边的按钮，或唯一的确定按钮 " });
   */
   sm(content, title, showLeft = false, left = {}, right = {}) { // showModal
     let _promise = new CCPromise();
@@ -82,19 +89,29 @@ const MTL = {
     })
     return _promise;
   },
-  // showModal with cancel 显示“取消按钮”
+  /**
+    * showModal 确认对话框 同时显示两个按钮
+    * @param {string} content 提示内容
+    * @param {string} title 提示的标题
+    * @param {object} left 左边按钮的样式 {text:'按钮名称',color:'颜色值'}
+    * @param {object} right 右边按钮的样式{text:'按钮名称',color:'颜色值'}
+    * @return CCPromise
+    * 使用简介：
+    * MTL.sm('确定删除吗?').right(()=>{ "点击了右边的按钮" }).left(()=>{ “点击了左边的按钮” });
+    * MTL.sm('记录已删除!').btn(()=>{ "点击了右边的按钮，或唯一的确定按钮 " });
+  */
   smc(content, title, left = {}, right = {}) { // showModal
     return this.sm(content, title, true, left, right);
   },
-  smgreen(content, title, left_text, right_text) {
-    return this.smc(content, title || '',
-      { text: left_text || '确定', color: '#02bb00' },
-      { text: right_text || '取消', color: '#000' });
-  },
-  // show loading 默认不带文字的加载动画
+  /**
+   * showLoading 默认不带文字的加载动画
+   * 
+   * @param {string} text 加载文字
+   * @param {boolean} isMask 是否启用mask（禁止触摸遮罩穿透）
+  */
   sl(text, isMask = true) {// 显示加载动画
-    if (IS_Loading) return; // 如果正在加载，就不需要“显示加载”操作
-    IS_Loading = true;
+    if (MTL_IS_Loading) return; // 如果正在加载，就不需要“显示加载”操作
+    MTL_IS_Loading = true;
     wx.showLoading({
       title: text || '',
       mask: isMask,
@@ -103,14 +120,19 @@ const MTL = {
       complete() { }
     });
   },
-  //  show loading with title 带默认文字："载入中 的加载动画
+  /**
+   * showLoading 默认带文字的加载动画
+   * 
+   * @param {string} text 加载文字
+   * @param {boolean} isMask 是否启用mask（禁止触摸遮罩穿透）默认启用
+  */
   slt(text, isMask = true) {// 显示加载动画
     this.sl(text || mtlParams.sl.defaultTitle, isMask);
   },
-  // close loading
-  cl() {// 关闭加载动画
-    if (!IS_Loading) return; // 如果没有在加载，就不需要“关闭加载”操作
-    IS_Loading = false;
+  // 关闭加载动画
+  cl() {
+    if (!MTL_IS_Loading) return; // 如果没有在加载，就不需要“关闭加载”操作
+    MTL_IS_Loading = false;
     wx.hideLoading({
       success() { },
       fail() { },
